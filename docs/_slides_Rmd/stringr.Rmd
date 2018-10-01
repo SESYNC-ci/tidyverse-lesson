@@ -1,0 +1,75 @@
+---
+---
+
+We already saw some examples of stringr but let's do some more
+
+===
+
+Remove the word Sector and modify to title case 
+
+```{r}
+library(stringr)
+library(dplyr)
+tidyfit1 %>%
+  pull(term) %>%
+  str_remove("Sector") %>%
+  str_to_title()
+```
+
+===
+
+Use purrr for iteration
+
+```{r}
+library(purrr)
+tidyfit1 %>%
+  mutate(term = map_chr(term, ~str_remove(., "Sector") %>% 
+                          str_to_title())) 
+```
+
+===
+
+str_trunc for truncating
+
+```{r}
+tidyfit1 %>%
+  mutate(term = map_chr(term, ~str_remove(., "Sector") %>% 
+                          str_to_title() %>% str_trunc(30, side = "right", ellipsis = "")))
+```
+
+===
+
+This may be useful for plotting
+
+```{r}
+tidyfit1 <- broom::tidy(fit1, conf.int = TRUE)
+
+library(ggplot2)
+
+tidyfit1 %>%
+  ggplot(aes(x = term, y = estimate)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = conf.low, ymax = conf.high)) + 
+  theme_bw() +
+  coord_flip()
+```
+
+===
+
+`glance` returns a tibble with one row of goodness of fit measures and
+related statistics, depending on model type. Good for comparing many models.
+
+```{r}
+broom::glance(fit1)
+```
+
+===
+
+`augment` adds a column to a dataset containing information such as fitted values,
+residuals, or cluster assignments. Column names have a `.` prefix to avoid overwriting
+existing column names. The first argument is a model object and the 2nd is data
+
+```{r}
+broom::augment(fit1, data = acs_cbp)
+```
+

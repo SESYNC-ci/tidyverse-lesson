@@ -1,0 +1,77 @@
+---
+---
+
+Recall that we were interested in this model
+
+The two datasets both contain economic variables for each U.S. county and
+specified by different categories of industry. The data could potentially be
+manipulated into a single table reflecting the follow statistical model.
+
+$$
+median\_income \sim industry + establishment\_size
+$$
+
+===
+
+Read in acs_cbp if not continuing on from dplyr lesson
+
+```{r}
+library(readr)
+acs_cbp <- read_csv("data/acs_cbp.csv")
+```
+
+===
+
+The output of model functions such as lm, nls, t.test, etc. tends to be messy
+
+```{r}
+fit1 <- glm(median_income ~ Sector, family = gaussian, data = acs_cbp)
+summary(fit1)
+```
+
+===
+
+The tidy function uses that output to create a tibble where each row contains
+information about an important component of the model
+
+```{r}
+library(broom)
+tidy(fit1)
+```
+
+===
+
+This may be useful for plotting
+
+```{r}
+tidyfit1 <- tidy(fit1, conf.int = TRUE)
+
+library(ggplot2)
+
+tidyfit1 %>%
+  ggplot(aes(x = term, y = estimate)) +
+  geom_point() +
+  geom_errorbar(aes(ymin = conf.low, ymax = conf.high)) + 
+  theme_bw() +
+  coord_flip()
+```
+
+===
+
+`glance` returns a tibble with one row of goodness of fit measures and
+related statistics, depending on model type. Good for comparing many models.
+
+```{r}
+glance(fit1)
+```
+
+===
+
+`augment` adds a column to a dataset containing information such as fitted values,
+residuals, or cluster assignments. Column names have a `.` prefix to avoid overwriting
+existing column names. The first argument is a model object and the 2nd is data
+
+```{r}
+augment(fit1, data = acs_cbp)
+```
+

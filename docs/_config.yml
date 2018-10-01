@@ -10,6 +10,15 @@ authors: Kelly Hondula
 # Slides
 
 slide_sorter:
+  - intro
+  - broom
+  - stringr
+  - fs
+  - lubridate
+  - forcats
+  - leaflet
+  - conclude
+  
 
 #####################################
 # Only modify content above or risk #

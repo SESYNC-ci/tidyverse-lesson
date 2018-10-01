@@ -1,0 +1,25 @@
+---
+---
+
+maps!
+
+===
+
+make into a simple features object using lat and lon columns and put on leaflet map
+
+```{r}
+library(leaflet)
+library(sf)
+
+# details_df %>% 
+#   dplyr::select(BEGIN_LAT, BEGIN_LON, END_LAT, END_LON, DEATHS_DIRECT,
+#                 EPISODE_NARRATIVE, EVENT_NARRATIVE, STATE, BEGIN_DATE_TIME) %>% 
+#   tidyr::drop_na(BEGIN_LAT) %>%
+#   st_as_sf(coords = c("BEGIN_LON", "BEGIN_LAT"), crs = 4326) %>%
+#   dplyr::filter(DEATHS_DIRECT > 0) %>% 
+#   leaflet() %>%
+#   addTiles() %>%
+#   addMarkers(popup = ~EPISODE_NARRATIVE, clusterOptions = markerClusterOptions())
+
+```
+

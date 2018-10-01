@@ -1,0 +1,45 @@
+---
+---
+
+Read in some new data for the rest of the lesson
+
+===
+
+Copy files from public-data to your directory (for demonstration purposes)
+
+```{r}
+library(fs)
+path <- "/nfs/public-data/NOAA/www.ncdc.noaa.gov"
+```
+
+===
+
+Find files with matching patterns 
+
+```{r}
+details <- dir_ls(path, recursive = TRUE, regexp = "details")
+# locations <- dir_ls(path, recursive = TRUE, regexp = "locations")
+# fatalities <- dir_ls(path, recursive = TRUE, regexp = "fatalities")
+```
+
+===
+
+Copy into new folders
+
+```{r}
+file_copy(details, new_path = dir_create("data/details/")) # slow
+```
+
+===
+
+Read in files from new location and create one big data frame.
+
+map_df applies function to a list of elements and binds dfs together
+assuming they can be combined
+
+```{r}
+details <- dir_ls("data/details")
+basename(details)
+details_df <- details[57:59] %>% purrr::map_df(readr::read_csv, .id = "filename")
+```
+

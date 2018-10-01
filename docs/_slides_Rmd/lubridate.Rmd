@@ -1,0 +1,88 @@
+---
+---
+
+Read in some new data for the rest of the lesson
+
+===
+
+See an unambiguously formatted datetime with
+
+```{r}
+Sys.time()
+```
+
+===
+
+What is it actually?
+
+```{r}
+as.numeric(Sys.time())
+```
+
+===
+
+There are several columns with date and time information
+
+```{r}
+names(details_df)
+```
+
+===
+
+Use strptime or as.POSIXct to convert
+
+```{r}
+details_df %>%
+  mutate(begin_iso_date = as.POSIXct(BEGIN_DATE_TIME, format = "%d-%b-%y %H:%M:%S")) %>%
+  pull(begin_iso_date) %>% head(10)
+```
+
+===
+
+lubridate has a slightly faster version of strptime
+
+```{r}
+library(lubridate)
+fast_strptime(details_df$BEGIN_DATE_TIME, format = "%d-%b-%y %H:%M:%S")
+```
+
+===
+
+Or if you don't want to look up the letter codes for strptime
+
+```{r}
+details_iso <- details_df %>% 
+  mutate(begin_datetime_iso = dmy_hms(BEGIN_DATE_TIME),
+         end_datetime_iso = dmy_hms(END_DATE_TIME)) 
+```
+
+===
+
+A few ways to calculate durations
+
+```{r}
+details_iso %>%
+  mutate(event_interval = begin_datetime_iso %--% end_datetime_iso,
+         event_duration = as.duration(event_interval),
+         event_duration_days = event_interval/days(1)) %>%
+  dplyr::select(event_interval, event_duration, event_duration_days) %>% head() 
+```
+
+===
+
+Timezones aren't correct though. See correctly formatted timezone names using OlsonNames().
+We'll switch one to use correctly.
+
+instead of using nested ifelse statements or switch, use case_when to modify the timezone column.
+case_when is particularly good for creating new variables that rely on a complex combination of 
+existing variables
+
+```{r}
+library(dplyr)
+details_df %>%
+  mutate(tz_olson = case_when(
+    CZ_TIMEZONE == "CST" ~ "US/Central")
+  )
+
+```
+
