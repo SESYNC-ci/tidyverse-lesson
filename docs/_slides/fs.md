@@ -1,6 +1,8 @@
 ---
 ---
 
+# File manipulation
+
 Read in some new data for the rest of the lesson
 
 ===
@@ -47,7 +49,7 @@ Copy into new folders
 Read in files from new location and create one big data frame.
 
 map_df applies function to a list of elements and binds dfs together
-assuming they can be combined
+assuming they can be combined. Read in *just* files 57-59. 
 
 
 
@@ -129,7 +131,8 @@ assuming they can be combined
 
 
 ~~~r
-> details_df <- details[57:59] %>% purrr::map_df(read_csv, .id = "filename")
+> details_df <- details[57:59] %>% 
++   purrr::map_df(read_csv, .id = "filename")
 ~~~
 {:.input title="Console"}
 

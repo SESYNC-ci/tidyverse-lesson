@@ -1,11 +1,11 @@
 ---
 ---
 
-Recall that we were interested in this model
+# Tidy models
 
-The two datasets both contain economic variables for each U.S. county and
-specified by different categories of industry. The data could potentially be
-manipulated into a single table reflecting the follow statistical model.
+We will start with the Census data set that was generated in the prior lesson.
+
+Recall that we were interested modeling the median income across counties. 
 
 $$
 median\_income \sim industry + establishment\_size
@@ -13,7 +13,7 @@ $$
 
 ===
 
-Read in acs_cbp if not continuing on from dplyr lesson
+Read in the `acs_cbp.csv` using the appropriate function in `readr`. 
 
 ```{r}
 library(readr)
@@ -22,17 +22,23 @@ acs_cbp <- read_csv("data/acs_cbp.csv")
 
 ===
 
-The output of model functions such as lm, nls, t.test, etc. tends to be messy
+Create a simple model comparing median income across Sectors. 
+One way to view details of the model fit is with `summary`. 
 
 ```{r}
-fit1 <- glm(median_income ~ Sector, family = gaussian, data = acs_cbp)
+fit1 <- glm(median_income ~ Sector, 
+            family = gaussian, 
+            data = acs_cbp)
 summary(fit1)
 ```
 
 ===
 
-The tidy function uses that output to create a tibble where each row contains
-information about an important component of the model
+The `broom` package helps to clean up the untidy structure of
+model outputs such as what is returned from `lm`, `nls`, `t.test`. 
+
+The `tidy` function creates a "tibble" with one row for each
+important component of the model.
 
 ```{r}
 library(broom)
@@ -41,15 +47,16 @@ tidy(fit1)
 
 ===
 
-This may be useful for plotting
+This may be useful for plotting, especially with the argument 
+to include estimated confidence intervals to use with `ggplot2`'s
+`geom_errobar`.
 
 ```{r}
 tidyfit1 <- tidy(fit1, conf.int = TRUE)
 
 library(ggplot2)
 
-tidyfit1 %>%
-  ggplot(aes(x = term, y = estimate)) +
+ggplot(tidyfit1, aes(x = term, y = estimate)) +
   geom_point() +
   geom_errorbar(aes(ymin = conf.low, ymax = conf.high)) + 
   theme_bw() +
@@ -58,8 +65,8 @@ tidyfit1 %>%
 
 ===
 
-`glance` returns a tibble with one row of goodness of fit measures and
-related statistics, depending on model type. Good for comparing many models.
+Use `glance` to retrieve goodness of fit measures and related statistics
+as one row per model. The metrics will depend on model type. 
 
 ```{r}
 glance(fit1)
@@ -67,11 +74,12 @@ glance(fit1)
 
 ===
 
-`augment` adds a column to a dataset containing information such as fitted values,
+Use `augment` to add a column to a dataset containing information such as fitted values,
 residuals, or cluster assignments. Column names have a `.` prefix to avoid overwriting
 existing column names. The first argument is a model object and the 2nd is data
 
-```{r}
-augment(fit1, data = acs_cbp)
+```{r warning=FALSE}
+acs_cbp2 <- augment(fit1, data = acs_cbp)
+names(acs_cbp2)
 ```
 

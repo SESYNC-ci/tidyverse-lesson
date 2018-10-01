@@ -1,7 +1,19 @@
 ---
 ---
 
-maps!
+# maps!
+
+===
+
+Make some categories for deadly and non-deadly storms, damages reported and not
+
+
+
+~~~r
+> # fct_collapse() # to combine categories
+~~~
+{:.input title="Console"}
+
 
 ===
 
@@ -12,17 +24,7 @@ make into a simple features object using lat and lon columns and put on leaflet 
 ~~~r
 > library(leaflet)
 > library(sf)
-~~~
-{:.input title="Console"}
-
-
-~~~
-Linking to GEOS 3.5.1, GDAL 2.1.3, proj.4 4.9.2
-~~~
-{:.output}
-
-
-~~~r
+> 
 > details_df %>%
 +   dplyr::select(BEGIN_LAT, BEGIN_LON, END_LAT, END_LON, DEATHS_DIRECT,
 +                 EPISODE_NARRATIVE, EVENT_NARRATIVE, STATE, BEGIN_DATE_TIME) %>%

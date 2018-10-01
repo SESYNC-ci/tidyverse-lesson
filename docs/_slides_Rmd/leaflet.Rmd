@@ -1,7 +1,15 @@
 ---
 ---
 
-maps!
+# maps!
+
+===
+
+Make some categories for deadly and non-deadly storms, damages reported and not
+
+```{r}
+# fct_collapse() # to combine categories
+```
 
 ===
 
