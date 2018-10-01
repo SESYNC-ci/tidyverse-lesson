@@ -1,13 +1,15 @@
 ---
 ---
 
-We already saw some examples of stringr but let's do some more
+Stringr!
 
 ===
 
+We already saw some examples of stringr but let's do some more
+
 Remove the word Sector and modify to title case 
 
-```{r}
+```{r title = "not console"}
 library(stringr)
 library(dplyr)
 tidyfit1 %>%

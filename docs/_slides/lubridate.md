@@ -16,7 +16,7 @@ See an unambiguously formatted datetime with
 
 
 ~~~
-[1] "2018-10-01 14:05:20 EDT"
+[1] "2018-10-01 15:35:38 EDT"
 ~~~
 {:.output}
 
@@ -34,7 +34,7 @@ What is it actually?
 
 
 ~~~
-[1] 1538417120
+[1] 1538422538
 ~~~
 {:.output}
 

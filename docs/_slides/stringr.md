@@ -1,19 +1,21 @@
 ---
 ---
 
-We already saw some examples of stringr but let's do some more
+Stringr!
 
 ===
+
+We already saw some examples of stringr but let's do some more
 
 Remove the word Sector and modify to title case 
 
 
 
 ~~~r
-> library(stringr)
-> library(dplyr)
+library(stringr)
+library(dplyr)
 ~~~
-{:.input title="Console"}
+{:.text-document title="not console"}
 
 
 ~~~
@@ -40,12 +42,12 @@ The following objects are masked from 'package:base':
 
 
 ~~~r
-> tidyfit1 %>%
-+   pull(term) %>%
-+   str_remove("Sector") %>%
-+   str_to_title()
+tidyfit1 %>%
+  pull(term) %>%
+  str_remove("Sector") %>%
+  str_to_title()
 ~~~
-{:.input title="Console"}
+{:.text-document title="not console"}
 
 
 ~~~

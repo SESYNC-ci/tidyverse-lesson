@@ -129,7 +129,7 @@ assuming they can be combined
 
 
 ~~~r
-> details_df <- details[57:59] %>% purrr::map_df(readr::read_csv, .id = "filename")
+> details_df <- details[57:59] %>% purrr::map_df(read_csv, .id = "filename")
 ~~~
 {:.input title="Console"}
 
