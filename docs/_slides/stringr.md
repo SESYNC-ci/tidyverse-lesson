@@ -193,7 +193,7 @@ This may be useful for plotting
 
 
 ~~~r
-> tidyfit1 <- broom::tidy(fit1, conf.int = TRUE)
+> # tidyfit1 <- broom::tidy(fit1, conf.int = TRUE)
 > 
 > library(ggplot2)
 > 
@@ -21113,3 +21113,4 @@ Warning: Deprecated: please use `purrr::possibly()` instead
 {:.output}
 
 
+(warning is from something inside the augment function?)

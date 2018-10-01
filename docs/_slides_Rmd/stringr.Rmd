@@ -42,7 +42,7 @@ tidyfit1 %>%
 This may be useful for plotting
 
 ```{r}
-tidyfit1 <- broom::tidy(fit1, conf.int = TRUE)
+# tidyfit1 <- broom::tidy(fit1, conf.int = TRUE)
 
 library(ggplot2)
 
@@ -73,3 +73,4 @@ existing column names. The first argument is a model object and the 2nd is data
 broom::augment(fit1, data = acs_cbp)
 ```
 
+(warning is from something inside the augment function?)

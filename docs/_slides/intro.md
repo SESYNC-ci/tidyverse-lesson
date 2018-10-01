@@ -3,13 +3,21 @@
 
 ## Lesson Objectives
 
-- Tidyverse objectives
+- This is a tour through the tidyverse
 
 ===
 
 ## Specific Achievements
 
-- tidyverse achievements
+Stops along the way:
+
+- broom
+- stringr
+- purrr
+- dplyr
+- lubridate
+- forcats
+- leaflet/sf
 
 Notes on the tidyverse
 {:.notes}
