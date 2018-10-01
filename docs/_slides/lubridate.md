@@ -41,7 +41,7 @@ What is it actually?
 
 ===
 
-There are several columns with date and time information
+There are several columns in the storm events data with dates and times.
 
 
 
@@ -74,15 +74,34 @@ There are several columns with date and time information
 {:.output}
 
 
+Unfortunately they are not in the desired format.
+
+
+
+~~~r
+> details_df$BEGIN_DATE_TIME %>% head()
+~~~
+{:.input title="Console"}
+
+
+~~~
+[1] "07-APR-06 15:15:00" "01-JAN-06 00:00:00" "01-JAN-06 00:00:00"
+[4] "01-JAN-06 00:00:00" "01-JAN-06 00:00:00" "30-JAN-06 05:00:00"
+~~~
+{:.output}
+
+
+
 ===
 
-Use strptime or as.POSIXct to convert
+Use strptime or as.POSIXct to convert. For help specifying the format refer to [link]().
 
 
 
 ~~~r
 > details_df %>%
-+   mutate(begin_iso_date = as.POSIXct(BEGIN_DATE_TIME, format = "%d-%b-%y %H:%M:%S")) %>%
++   mutate(begin_iso_date = as.POSIXct(BEGIN_DATE_TIME, 
++                                      format = "%d-%b-%y %H:%M:%S")) %>%
 +   pull(begin_iso_date) %>% head(10)
 ~~~
 {:.input title="Console"}
@@ -106,26 +125,6 @@ lubridate has a slightly faster version of strptime
 
 ~~~r
 > library(lubridate)
-~~~
-{:.input title="Console"}
-
-
-~~~
-
-Attaching package: 'lubridate'
-~~~
-{:.output}
-
-
-~~~
-The following object is masked from 'package:base':
-
-    date
-~~~
-{:.output}
-
-
-~~~r
 > fast_strptime(details_df$BEGIN_DATE_TIME, format = "%d-%b-%y %H:%M:%S")
 ~~~
 {:.input title="Console"}
@@ -50154,7 +50153,9 @@ Or if you don't want to look up the letter codes for strptime
 
 ===
 
-A few ways to calculate durations
+Intervals, durations, and time periods are where `lubridate` shinys. 
+
+Make a time interval using the `%--%` operator, then calculate its duration.
 
 
 
@@ -50196,45 +50197,11 @@ existing variables
 
 ~~~r
 > library(dplyr)
-> details_df %>%
+> details_df <- details_df %>%
 +   mutate(tz_olson = case_when(
 +     CZ_TIMEZONE == "CST" ~ "US/Central")
 +   )
 ~~~
 {:.input title="Console"}
-
-
-~~~
-# A tibble: 187,143 x 53
-   filename BEGIN_YEARMONTH BEGIN_DAY BEGIN_TIME END_YEARMONTH END_DAY
-   <chr>              <int>     <int>      <int>         <int>   <int>
- 1 data/de…          200604         7       1515        200604       7
- 2 data/de…          200601         1          0        200601      31
- 3 data/de…          200601         1          0        200601      31
- 4 data/de…          200601         1          0        200601      31
- 5 data/de…          200601         1          0        200601      31
- 6 data/de…          200601        30        500        200601      31
- 7 data/de…          200601        30        500        200601      31
- 8 data/de…          200601        28        800        200601      29
- 9 data/de…          200601        28       1400        200601      29
-10 data/de…          200601        28        800        200601      29
-# ... with 187,133 more rows, and 47 more variables: END_TIME <int>,
-#   EPISODE_ID <int>, EVENT_ID <int>, STATE <chr>, STATE_FIPS <int>,
-#   YEAR <int>, MONTH_NAME <chr>, EVENT_TYPE <chr>, CZ_TYPE <chr>,
-#   CZ_FIPS <int>, CZ_NAME <chr>, WFO <chr>, BEGIN_DATE_TIME <chr>,
-#   CZ_TIMEZONE <chr>, END_DATE_TIME <chr>, INJURIES_DIRECT <int>,
-#   INJURIES_INDIRECT <int>, DEATHS_DIRECT <int>, DEATHS_INDIRECT <int>,
-#   DAMAGE_PROPERTY <chr>, DAMAGE_CROPS <chr>, SOURCE <chr>,
-#   MAGNITUDE <dbl>, MAGNITUDE_TYPE <chr>, FLOOD_CAUSE <chr>,
-#   CATEGORY <chr>, TOR_F_SCALE <chr>, TOR_LENGTH <dbl>, TOR_WIDTH <dbl>,
-#   TOR_OTHER_WFO <chr>, TOR_OTHER_CZ_STATE <chr>,
-#   TOR_OTHER_CZ_FIPS <chr>, TOR_OTHER_CZ_NAME <chr>, BEGIN_RANGE <int>,
-#   BEGIN_AZIMUTH <chr>, BEGIN_LOCATION <chr>, END_RANGE <int>,
-#   END_AZIMUTH <chr>, END_LOCATION <chr>, BEGIN_LAT <dbl>,
-#   BEGIN_LON <dbl>, END_LAT <dbl>, END_LON <dbl>,
-#   EPISODE_NARRATIVE <chr>, EVENT_NARRATIVE <chr>, DATA_SOURCE <chr>,
-#   tz_olson <chr>
-~~~
-{:.output}
 
 

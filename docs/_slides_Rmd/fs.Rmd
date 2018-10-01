@@ -3,11 +3,11 @@
 
 # File manipulation
 
-Read in some new data for the rest of the lesson
+The `fs` package has functions for interacting with the file system.
 
 ===
 
-Copy files from public-data to your directory (for demonstration purposes)
+We will copy some files from public-data for demonstration purposes
 
 ```{r}
 library(fs)
@@ -26,7 +26,7 @@ details <- dir_ls(path, recursive = TRUE, regexp = "details")
 
 ===
 
-Copy into new folders
+Copy into new folders (maybe only copy the ones that work here?)
 
 ```{r}
 file_copy(details, new_path = dir_create("data/details/")) # slow
@@ -36,13 +36,20 @@ file_copy(details, new_path = dir_create("data/details/")) # slow
 
 Read in files from new location and create one big data frame.
 
-map_df applies function to a list of elements and binds dfs together
+`map_df` applies function to a list of elements and binds dfs together
 assuming they can be combined. Read in *just* files 57-59. 
 
-```{r}
+```{r message=FALSE}
 details <- dir_ls("data/details")
 basename(details)
+```
+
+```{r message=FALSE}
 details_df <- details[57:59] %>% 
-  purrr::map_df(read_csv, .id = "filename")
+  map_df(read_csv, .id = "filename")
+```
+
+```{r}
+head(details_df)
 ```
 

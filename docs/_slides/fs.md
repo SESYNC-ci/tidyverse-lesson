@@ -3,11 +3,11 @@
 
 # File manipulation
 
-Read in some new data for the rest of the lesson
+The `fs` package has functions for interacting with the file system.
 
 ===
 
-Copy files from public-data to your directory (for demonstration purposes)
+We will copy some files from public-data for demonstration purposes
 
 
 
@@ -34,7 +34,7 @@ Find files with matching patterns
 
 ===
 
-Copy into new folders
+Copy into new folders (maybe only copy the ones that work here?)
 
 
 
@@ -48,7 +48,7 @@ Copy into new folders
 
 Read in files from new location and create one big data frame.
 
-map_df applies function to a list of elements and binds dfs together
+`map_df` applies function to a list of elements and binds dfs together
 assuming they can be combined. Read in *just* files 57-59. 
 
 
@@ -130,117 +130,48 @@ assuming they can be combined. Read in *just* files 57-59.
 {:.output}
 
 
+
+
 ~~~r
 > details_df <- details[57:59] %>% 
-+   purrr::map_df(read_csv, .id = "filename")
++   map_df(read_csv, .id = "filename")
+~~~
+{:.input title="Console"}
+
+
+
+
+~~~r
+> head(details_df)
 ~~~
 {:.input title="Console"}
 
 
 ~~~
-Parsed with column specification:
-cols(
-  .default = col_character(),
-  BEGIN_YEARMONTH = col_integer(),
-  BEGIN_DAY = col_integer(),
-  BEGIN_TIME = col_integer(),
-  END_YEARMONTH = col_integer(),
-  END_DAY = col_integer(),
-  END_TIME = col_integer(),
-  EPISODE_ID = col_integer(),
-  EVENT_ID = col_integer(),
-  STATE_FIPS = col_integer(),
-  YEAR = col_integer(),
-  CZ_FIPS = col_integer(),
-  INJURIES_DIRECT = col_integer(),
-  INJURIES_INDIRECT = col_integer(),
-  DEATHS_DIRECT = col_integer(),
-  DEATHS_INDIRECT = col_integer(),
-  MAGNITUDE = col_double(),
-  TOR_LENGTH = col_double(),
-  TOR_WIDTH = col_double(),
-  BEGIN_RANGE = col_integer(),
-  END_RANGE = col_integer()
-  # ... with 4 more columns
-)
-~~~
-{:.output}
-
-
-~~~
-See spec(...) for full column specifications.
-~~~
-{:.output}
-
-
-~~~
-Parsed with column specification:
-cols(
-  .default = col_character(),
-  BEGIN_YEARMONTH = col_integer(),
-  BEGIN_DAY = col_integer(),
-  BEGIN_TIME = col_integer(),
-  END_YEARMONTH = col_integer(),
-  END_DAY = col_integer(),
-  END_TIME = col_integer(),
-  EPISODE_ID = col_integer(),
-  EVENT_ID = col_integer(),
-  STATE_FIPS = col_integer(),
-  YEAR = col_integer(),
-  CZ_FIPS = col_integer(),
-  INJURIES_DIRECT = col_integer(),
-  INJURIES_INDIRECT = col_integer(),
-  DEATHS_DIRECT = col_integer(),
-  DEATHS_INDIRECT = col_integer(),
-  MAGNITUDE = col_double(),
-  TOR_LENGTH = col_double(),
-  TOR_WIDTH = col_integer(),
-  BEGIN_RANGE = col_integer(),
-  END_RANGE = col_integer()
-  # ... with 4 more columns
-)
-~~~
-{:.output}
-
-
-~~~
-See spec(...) for full column specifications.
-~~~
-{:.output}
-
-
-~~~
-Parsed with column specification:
-cols(
-  .default = col_character(),
-  BEGIN_YEARMONTH = col_integer(),
-  BEGIN_DAY = col_integer(),
-  BEGIN_TIME = col_integer(),
-  END_YEARMONTH = col_integer(),
-  END_DAY = col_integer(),
-  END_TIME = col_integer(),
-  EPISODE_ID = col_integer(),
-  EVENT_ID = col_integer(),
-  STATE_FIPS = col_integer(),
-  YEAR = col_integer(),
-  CZ_FIPS = col_integer(),
-  INJURIES_DIRECT = col_integer(),
-  INJURIES_INDIRECT = col_integer(),
-  DEATHS_DIRECT = col_integer(),
-  DEATHS_INDIRECT = col_integer(),
-  MAGNITUDE = col_double(),
-  TOR_LENGTH = col_double(),
-  TOR_WIDTH = col_integer(),
-  BEGIN_RANGE = col_integer(),
-  END_RANGE = col_integer()
-  # ... with 4 more columns
-)
-~~~
-{:.output}
-
-
-~~~
-See spec(...) for full column specifications.
+# A tibble: 6 x 52
+  filename BEGIN_YEARMONTH BEGIN_DAY BEGIN_TIME END_YEARMONTH END_DAY
+  <chr>              <int>     <int>      <int>         <int>   <int>
+1 data/de…          200604         7       1515        200604       7
+2 data/de…          200601         1          0        200601      31
+3 data/de…          200601         1          0        200601      31
+4 data/de…          200601         1          0        200601      31
+5 data/de…          200601         1          0        200601      31
+6 data/de…          200601        30        500        200601      31
+# ... with 46 more variables: END_TIME <int>, EPISODE_ID <int>,
+#   EVENT_ID <int>, STATE <chr>, STATE_FIPS <int>, YEAR <int>,
+#   MONTH_NAME <chr>, EVENT_TYPE <chr>, CZ_TYPE <chr>, CZ_FIPS <int>,
+#   CZ_NAME <chr>, WFO <chr>, BEGIN_DATE_TIME <chr>, CZ_TIMEZONE <chr>,
+#   END_DATE_TIME <chr>, INJURIES_DIRECT <int>, INJURIES_INDIRECT <int>,
+#   DEATHS_DIRECT <int>, DEATHS_INDIRECT <int>, DAMAGE_PROPERTY <chr>,
+#   DAMAGE_CROPS <chr>, SOURCE <chr>, MAGNITUDE <dbl>,
+#   MAGNITUDE_TYPE <chr>, FLOOD_CAUSE <chr>, CATEGORY <chr>,
+#   TOR_F_SCALE <chr>, TOR_LENGTH <dbl>, TOR_WIDTH <dbl>,
+#   TOR_OTHER_WFO <chr>, TOR_OTHER_CZ_STATE <chr>,
+#   TOR_OTHER_CZ_FIPS <chr>, TOR_OTHER_CZ_NAME <chr>, BEGIN_RANGE <int>,
+#   BEGIN_AZIMUTH <chr>, BEGIN_LOCATION <chr>, END_RANGE <int>,
+#   END_AZIMUTH <chr>, END_LOCATION <chr>, BEGIN_LAT <dbl>,
+#   BEGIN_LON <dbl>, END_LAT <dbl>, END_LON <dbl>,
+#   EPISODE_NARRATIVE <chr>, EVENT_NARRATIVE <chr>, DATA_SOURCE <chr>
 ~~~
 {:.output}
 

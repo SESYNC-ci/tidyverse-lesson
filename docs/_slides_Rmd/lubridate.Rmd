@@ -21,19 +21,27 @@ as.numeric(Sys.time())
 
 ===
 
-There are several columns with date and time information
+There are several columns in the storm events data with dates and times.
 
 ```{r}
 names(details_df)
 ```
 
+Unfortunately they are not in the desired format.
+
+```{r}
+details_df$BEGIN_DATE_TIME %>% head()
+```
+
+
 ===
 
-Use strptime or as.POSIXct to convert
+Use strptime or as.POSIXct to convert. For help specifying the format refer to [link]().
 
 ```{r}
 details_df %>%
-  mutate(begin_iso_date = as.POSIXct(BEGIN_DATE_TIME, format = "%d-%b-%y %H:%M:%S")) %>%
+  mutate(begin_iso_date = as.POSIXct(BEGIN_DATE_TIME, 
+                                     format = "%d-%b-%y %H:%M:%S")) %>%
   pull(begin_iso_date) %>% head(10)
 ```
 
@@ -58,7 +66,9 @@ details_iso <- details_df %>%
 
 ===
 
-A few ways to calculate durations
+Intervals, durations, and time periods are where `lubridate` shinys. 
+
+Make a time interval using the `%--%` operator, then calculate its duration.
 
 ```{r}
 details_iso %>%
@@ -79,7 +89,7 @@ existing variables
 
 ```{r}
 library(dplyr)
-details_df %>%
+details_df <- details_df %>%
   mutate(tz_olson = case_when(
     CZ_TIMEZONE == "CST" ~ "US/Central")
   )

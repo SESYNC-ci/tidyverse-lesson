@@ -13,9 +13,10 @@ slide_sorter:
   - intro
   - broom
   - stringr
+  - purrr
+  - forcats
   - fs
   - lubridate
-  - forcats
   - leaflet
   - conclude
   

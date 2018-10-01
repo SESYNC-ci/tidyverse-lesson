@@ -1,0 +1,24 @@
+---
+---
+
+# Iterate with purrr
+
+===
+
+Use `map_%` functions in purrr for iteration. 
+
+```{r}
+library(purrr)
+tidyfit1 <- tidyfit1 %>%
+  mutate(term = map_chr(term, 
+          ~str_remove(., "Sector") %>% 
+           str_to_title())) 
+```
+
+```{r title = "Console"}
+tidyfit1$term
+```
+
+===
+
+

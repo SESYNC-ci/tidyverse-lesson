@@ -23,6 +23,16 @@ tidyfit1 %>%
 
 ===
 
+str_trunc for truncating
+
+```{r}
+tidyfit1 %>%
+  mutate(term = map_chr(term, 
+          ~str_trunc(., 30, side = "right", ellipsis = "")))
+```
+
+===
+
 Use purrr for iteration!
 
 ```{r}
@@ -35,16 +45,6 @@ tidyfit1 <- tidyfit1 %>%
 
 ```{r title = "Console"}
 tidyfit1$term
-```
-
-===
-
-str_trunc for truncating
-
-```{r}
-tidyfit1 %>%
-  mutate(term = map_chr(term, 
-          ~str_trunc(., 30, side = "right", ellipsis = "")))
 ```
 
 ===
