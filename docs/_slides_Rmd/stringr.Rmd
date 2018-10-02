@@ -21,15 +21,6 @@ tidyfit1 %>%
   str_to_title()
 ```
 
-===
-
-str_trunc for truncating
-
-```{r}
-tidyfit1 %>%
-  mutate(term = map_chr(term, 
-          ~str_trunc(., 30, side = "right", ellipsis = "")))
-```
 
 ===
 
@@ -49,4 +40,12 @@ tidyfit1$term
 
 ===
 
+
+str_trunc for truncating
+
+```{r}
+tidyfit1 %>%
+  mutate(term = map_chr(term, 
+          ~str_trunc(., 30, side = "right", ellipsis = "")))
+```
 

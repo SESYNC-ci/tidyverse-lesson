@@ -10,6 +10,7 @@ provide information on additional functions for "data wrangling".
 - [Tidyverse Reference on Broom]
 - [Purrr Tutorial]
 - [Purrr Video]
+- [Tidyverse slides]
 
 The first is one of several cheat sheets created by RStudio, and
 provides a handy, visual summary of all the key functions discussed in this
@@ -22,3 +23,4 @@ window" functions for mutate, etc.
 [Tidyverse Reference on Broom]: https://broom.tidyverse.org/articles/broom.html
 [Purrr Tutorial]: https://jennybc.github.io/purrr-tutorial/
 [Purrr Video]: https://www.youtube.com/watch?v=7UlWJWfZO9M
+[Tidyverse slides]: https://github.com/rstudio/rstudio-conf/blob/master/2017/The_Tidyverse-Hadley_Wickham/tidyverse.pdf

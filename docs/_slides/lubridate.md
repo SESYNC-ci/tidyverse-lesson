@@ -16,7 +16,7 @@ See an unambiguously formatted datetime with
 
 
 ~~~
-[1] "2018-10-01 15:35:38 EDT"
+[1] "2018-10-02 18:04:14 EDT"
 ~~~
 {:.output}
 
@@ -34,7 +34,7 @@ What is it actually?
 
 
 ~~~
-[1] 1538422538
+[1] 1538517854
 ~~~
 {:.output}
 
@@ -125,6 +125,26 @@ lubridate has a slightly faster version of strptime
 
 ~~~r
 > library(lubridate)
+~~~
+{:.input title="Console"}
+
+
+~~~
+
+Attaching package: 'lubridate'
+~~~
+{:.output}
+
+
+~~~
+The following object is masked from 'package:base':
+
+    date
+~~~
+{:.output}
+
+
+~~~r
 > fast_strptime(details_df$BEGIN_DATE_TIME, format = "%d-%b-%y %H:%M:%S")
 ~~~
 {:.input title="Console"}
