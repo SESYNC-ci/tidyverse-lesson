@@ -3,8 +3,9 @@
 
 ## Lesson Objectives
 
-- Become familiar with tidyverse charcteristics
-- Combine functionality of tidyverse packages
+- Become familiar with opinions of the tidyverse
+- Learn functions for tidy import, tranformation, visualization, and modeling
+- Combine functionality of multiple tidyverse packages
 
 ===
 

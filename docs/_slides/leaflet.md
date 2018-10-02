@@ -5,6 +5,7 @@
 
 ===
 
+Do something else with forcats.. 
 Make some categories for deadly and non-deadly storms, damages reported and not
 
 
@@ -17,7 +18,8 @@ Make some categories for deadly and non-deadly storms, damages reported and not
 
 ===
 
-make into a simple features object using lat and lon columns and put on leaflet map
+make into a simple features object using lat and lon columns and put on leaflet map.
+Notice `drop_na` from tidyr. 
 
 
 

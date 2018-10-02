@@ -26,10 +26,10 @@ details <- dir_ls(path, recursive = TRUE, regexp = "details")
 
 ===
 
-Copy into new folders (maybe only copy the ones that work here?)
+Copy *just* files 57-59 into a new folder called "details" in the data folder. 
 
 ```{r}
-file_copy(details, new_path = dir_create("data/details/")) # slow
+file_copy(details[57:59], new_path = dir_create("data/details/"))
 ```
 
 ===
@@ -37,7 +37,7 @@ file_copy(details, new_path = dir_create("data/details/")) # slow
 Read in files from new location and create one big data frame.
 
 `map_df` applies function to a list of elements and binds dfs together
-assuming they can be combined. Read in *just* files 57-59. 
+assuming they can be combined.  
 
 ```{r message=FALSE}
 details <- dir_ls("data/details")
@@ -45,7 +45,7 @@ basename(details)
 ```
 
 ```{r message=FALSE}
-details_df <- details[57:59] %>% 
+details_df <- details %>% 
   map_df(read_csv, .id = "filename")
 ```
 

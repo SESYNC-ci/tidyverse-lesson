@@ -50153,7 +50153,7 @@ Or if you don't want to look up the letter codes for strptime
 
 ===
 
-Intervals, durations, and time periods are where `lubridate` shinys. 
+Intervals, durations, and time periods are where `lubridate` shines. 
 
 Make a time interval using the `%--%` operator, then calculate its duration.
 

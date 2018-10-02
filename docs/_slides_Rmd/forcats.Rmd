@@ -3,7 +3,7 @@
 
 # Embrace factors
 
-forcats for factors. not to be confused with forecast. This could go in a different spot of the lesson
+forcats for factors. not to be confused with forecast.
 
 ===
 
