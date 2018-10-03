@@ -24,7 +24,7 @@ tidyfit1 %>%
   coord_flip()
 ```
 
-==
+===
 
 `fct_collapse` to combine factors
 

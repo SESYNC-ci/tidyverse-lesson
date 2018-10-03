@@ -3,6 +3,8 @@
 
 # Dates and times with lubridate
 
+===
+
 ![](https://imgs.xkcd.com/comics/iso_8601.png)
 
 ===
@@ -92,6 +94,8 @@ details_iso %>%
 ===
 
 Timezones aren't correct though. See correctly formatted timezone names using `OlsonNames()`.
+
+===
 
 ![](https://imgs.xkcd.com/comics/supervillain_plan.png)
 

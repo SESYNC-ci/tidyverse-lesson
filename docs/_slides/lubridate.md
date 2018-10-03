@@ -3,6 +3,8 @@
 
 # Dates and times with lubridate
 
+===
+
 ![](https://imgs.xkcd.com/comics/iso_8601.png)
 
 ===
@@ -50218,6 +50220,8 @@ Make a time interval using the `%--%` operator, then calculate its duration.
 ===
 
 Timezones aren't correct though. See correctly formatted timezone names using `OlsonNames()`.
+
+===
 
 ![](https://imgs.xkcd.com/comics/supervillain_plan.png)
 

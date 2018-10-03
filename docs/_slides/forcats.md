@@ -29,7 +29,7 @@ Make the model term column a factor to use `fct_reorder` for sorting.
 ![ ]({{ site.baseurl }}/images/forcats/unnamed-chunk-1-1.png)
 {:.captioned}
 
-==
+===
 
 `fct_collapse` to combine factors
 
