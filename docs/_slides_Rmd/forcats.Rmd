@@ -3,7 +3,7 @@
 
 # Embrace factors
 
-forcats for factors. not to be confused with forecast.
+`forcats` is for factors. Not to be confused with the `forecast` package.
 
 ===
 
@@ -14,13 +14,22 @@ library(forcats)
 
 tidyfit1 %>%
   mutate(term = as_factor(term)) %>%
-  mutate(term = fct_reorder(term, estimate)) %>%
+  mutate(
+    term = fct_reorder(term, estimate)) %>%
   ggplot(aes(x = term, y = estimate)) +
   geom_point() +
-  geom_errorbar(aes(ymin = conf.low, ymax = conf.high)) + 
+  geom_errorbar(aes(ymin = conf.low, 
+                    ymax = conf.high)) + 
   theme_bw() +
   coord_flip()
 ```
 
+==
+
+`fct_collapse` to combine factors
+
+```{r}
+# example
+```
 
 

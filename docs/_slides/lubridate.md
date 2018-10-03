@@ -1,7 +1,9 @@
 ---
 ---
 
-# Dates and times 
+# Dates and times with lubridate
+
+![](https://imgs.xkcd.com/comics/iso_8601.png)
 
 ===
 
@@ -16,7 +18,7 @@ See an unambiguously formatted datetime with
 
 
 ~~~
-[1] "2018-10-02 18:04:14 EDT"
+[1] "2018-10-03 10:12:04 EDT"
 ~~~
 {:.output}
 
@@ -34,14 +36,14 @@ What is it actually?
 
 
 ~~~
-[1] 1538517854
+[1] 1538575925
 ~~~
 {:.output}
 
 
 ===
 
-There are several columns in the storm events data with dates and times.
+There are many columns in the storm events data with date and time. Information
 
 
 
@@ -74,7 +76,7 @@ There are several columns in the storm events data with dates and times.
 {:.output}
 
 
-Unfortunately they are not in the desired format.
+Unfortunately none are in standard format.
 
 
 
@@ -94,14 +96,15 @@ Unfortunately they are not in the desired format.
 
 ===
 
-Use strptime or as.POSIXct to convert. For help specifying the format refer to [link]().
+Use strptime or as.POSIXct to convert. For help specifying the format refer to [here](http://strftime.org/) or `?strptime`.
 
 
 
 ~~~r
 > details_df %>%
-+   mutate(begin_iso_date = as.POSIXct(BEGIN_DATE_TIME, 
-+                                      format = "%d-%b-%y %H:%M:%S")) %>%
++   mutate(begin_iso_date = 
++            as.POSIXct(BEGIN_DATE_TIME, 
++   format = "%d-%b-%y %H:%M:%S")) %>%
 +   pull(begin_iso_date) %>% head(10)
 ~~~
 {:.input title="Console"}
@@ -145,7 +148,8 @@ The following object is masked from 'package:base':
 
 
 ~~~r
-> fast_strptime(details_df$BEGIN_DATE_TIME, format = "%d-%b-%y %H:%M:%S")
+> fast_strptime(details_df$BEGIN_DATE_TIME, 
++               format = "%d-%b-%y %H:%M:%S")
 ~~~
 {:.input title="Console"}
 
@@ -50165,8 +50169,10 @@ Or if you don't want to look up the letter codes for strptime
 
 ~~~r
 > details_iso <- details_df %>% 
-+   mutate(begin_datetime_iso = dmy_hms(BEGIN_DATE_TIME),
-+          end_datetime_iso = dmy_hms(END_DATE_TIME)) 
++   mutate(begin_datetime_iso = 
++            dmy_hms(BEGIN_DATE_TIME),
++          end_datetime_iso = 
++            dmy_hms(END_DATE_TIME)) 
 ~~~
 {:.input title="Console"}
 
@@ -50181,10 +50187,15 @@ Make a time interval using the `%--%` operator, then calculate its duration.
 
 ~~~r
 > details_iso %>%
-+   mutate(event_interval = begin_datetime_iso %--% end_datetime_iso,
-+          event_duration = as.duration(event_interval),
-+          event_duration_days = event_interval/days(1)) %>%
-+   dplyr::select(event_interval, event_duration, event_duration_days) %>% head() 
++   mutate(event_interval = 
++            begin_datetime_iso %--% end_datetime_iso,
++          event_duration = 
++            as.duration(event_interval),
++          event_duration_days = 
++            event_interval/days(1)) %>%
++   dplyr::select(event_interval, 
++                 event_duration, 
++                 event_duration_days) %>% head() 
 ~~~
 {:.input title="Console"}
 
@@ -50206,10 +50217,13 @@ Make a time interval using the `%--%` operator, then calculate its duration.
 
 ===
 
-Timezones aren't correct though. See correctly formatted timezone names using OlsonNames().
-We'll switch one to use correctly.
+Timezones aren't correct though. See correctly formatted timezone names using `OlsonNames()`.
 
-instead of using nested ifelse statements or switch, use case_when to modify the timezone column.
+![](https://imgs.xkcd.com/comics/supervillain_plan.png)
+
+===
+
+instead of using nested ifelse statements or switch, use `case_when` to modify the timezone column.
 case_when is particularly good for creating new variables that rely on a complex combination of 
 existing variables
 

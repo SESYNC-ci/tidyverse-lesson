@@ -18,18 +18,49 @@ make into a simple features object using lat and lon columns and put on leaflet 
 Notice `drop_na` from tidyr. 
 
 ```{r}
-library(leaflet)
 library(sf)
 
-details_df %>%
+details_sf <- details_df %>%
   dplyr::select(BEGIN_LAT, BEGIN_LON, END_LAT, END_LON, DEATHS_DIRECT,
                 EPISODE_NARRATIVE, EVENT_NARRATIVE, STATE, BEGIN_DATE_TIME) %>%
   tidyr::drop_na(BEGIN_LAT) %>%
   st_as_sf(coords = c("BEGIN_LON", "BEGIN_LAT"), crs = 4326) %>%
-  dplyr::filter(DEATHS_DIRECT > 0) %>%
-  leaflet() %>%
-  addTiles() %>%
-  addMarkers(popup = ~EPISODE_NARRATIVE, clusterOptions = markerClusterOptions())
-
+  dplyr::filter(DEATHS_DIRECT > 0)
 ```
 
+===
+
+`sf` objects can be plotted with `geom_sf`
+
+```{r}
+details_sf %>%
+  ggplot() +
+  geom_sf()
+```
+
+===
+
+Make an interactive map with base layers using leaflet.
+
+```{r}
+library(leaflet)
+
+details_sf %>%
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers()
+```
+
+===
+
+Jazz it up a bit with pop-ups, clustering, and layers. 
+
+```{r}
+details_sf %>%
+  leaflet() %>%
+  addTiles() %>%
+  addMarkers(popup = ~EPISODE_NARRATIVE, 
+             clusterOptions = markerClusterOptions(),
+             group = "episodes") %>%
+  addLayersControl(overlayGroups = c("episodes"))
+```

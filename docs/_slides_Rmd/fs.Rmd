@@ -16,40 +16,35 @@ path <- "/nfs/public-data/NOAA/www.ncdc.noaa.gov"
 
 ===
 
-Find files with matching patterns 
+Find files with matching patterns in this highly nested set of folders. 
 
 ```{r}
-details <- dir_ls(path, recursive = TRUE, regexp = "details")
+details <- dir_ls(path, 
+                  recursive = TRUE, 
+                  regexp = "details")
 # locations <- dir_ls(path, recursive = TRUE, regexp = "locations")
 # fatalities <- dir_ls(path, recursive = TRUE, regexp = "fatalities")
-```
-
-===
-
-Copy *just* files 57-59 into a new folder called "details" in the data folder.
-
-```{r}
-file_copy(details[57:59], new_path = dir_create("data/details/"))
-```
-
-===
-
-Read in files from new location and create one big data frame.
-
-`map_df` applies function to a list of elements and binds dfs together
-assuming they can be combined.  
-
-```{r message=FALSE}
-details <- dir_ls("data/details")
 basename(details)
+dirname(details)
 ```
 
-```{r message=FALSE}
-details_df <- details %>% 
-  map_df(read_csv, .id = "filename")
-```
+===
+
+Copy *just* files 57-59 into a new folder called "details" in your data folder.
 
 ```{r}
+file_copy(path = details[57:59], 
+          new_path = dir_create("data/details/"))
+```
+
+===
+
+Read in files from new location and create one big data frame using `purrr`'s `map_df` to iterate the `read_csv` function over the file paths. `.id` is a column name to identify each of the file paths. 
+
+```{r message=FALSE}
+details_df <- dir_ls("data/details") %>% 
+  map_df(read_csv, .id = "filename")
+
 head(details_df)
 ```
 

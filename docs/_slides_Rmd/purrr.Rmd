@@ -5,7 +5,60 @@
 
 ===
 
-Use `map_%` functions in purrr for iteration. 
+We already used stringr in the dplyr lesson to modify NAICS codes: `str_detect`, `str_c`, `str_remove`
+
+Here we will manipulate the "term"" column of the `broom` output to improve figure axis labels. Load `stringr`
+
+Load `stringr` as well as `dplyr`.
+
+```{r}
+library(stringr)
+library(dplyr)
+```
+
+===
+
+Use `dplyr`'s `pull` function to extract the column "term" from the tidyfit1 data frame. 
+Remove the word "Sector" and modify to title case.
+
+```{r title = "worksheet-1.R", message=FALSE}
+tidyfit1 %>%
+  pull(term) %>%
+  str_remove("Sector") %>%
+  str_to_title()
+```
+
+===
+
+Another handy function in `stringr` truncates long strings
+
+```{r}
+tidyfit1 %>%
+  pull(term) %>%
+  str_remove("Sector") %>%
+  str_to_title() %>%
+  str_trunc(30, side = "right", ellipsis = "")
+```
+
+===
+
+A core syntax element of the tidyverse is the **piped workflow** where the object on the left-hand side of `%>%` becomes the first argument to the function on the right-hand side. This reduces intermediate objects filling up your workspace and can improve readability. 
+
+```{r title = "worksheet-1.R", message=FALSE}
+term1 <- pull(tidyfit1, term)
+term2 <- str_remove(term1, "Sector")
+term3 <- str_to_title(term2)
+```
+
+or 
+
+```{r}
+str_to_title(str_remove(pull(tidyfit1, term), "Sector"))
+```
+
+===
+
+Another core tidyverse method is to use `purrr`'s `map_` functions for iteration, instead of for loops, s/l/apply functions, or copy-paste. Here we use `map_chr` to create the new term vector within a mutate function. The `.` represents each item from the first argument to be iterated over and the `~` is an anonymous function. `map_chr` returns a character vector. 
 
 ```{r}
 library(purrr)
@@ -18,7 +71,4 @@ tidyfit1 <- tidyfit1 %>%
 ```{r title = "Console"}
 tidyfit1$term
 ```
-
-===
-
 

@@ -1,7 +1,7 @@
 ---
 ---
 
-# Tidy models
+# Tidy models with broom
 
 We will start with the Census data set that was generated in the prior lesson.
 
@@ -130,10 +130,10 @@ Number of Fisher Scoring iterations: 2
 
 ===
 
-The `broom` package helps to clean up the untidy structure of
+That output is decidely untidy. The `broom` package will clean up
 model outputs such as what is returned from `lm`, `nls`, `t.test`. 
 
-The `tidy` function creates a "tibble" with one row for each
+The `tidy` function creates a data frame with one row for each
 important component of the model.
 
 
@@ -192,7 +192,7 @@ important component of the model.
 
 This may be useful for plotting, especially with the argument 
 to include estimated confidence intervals to use with `ggplot2`'s
-`geom_errobar`.
+`geom_errobar`. 
 
 
 
@@ -200,10 +200,11 @@ to include estimated confidence intervals to use with `ggplot2`'s
 > tidyfit1 <- tidy(fit1, conf.int = TRUE)
 > 
 > library(ggplot2)
-> 
-> ggplot(tidyfit1, aes(x = term, y = estimate)) +
+> ggplot(tidyfit1, aes(x = term, 
++                      y = estimate)) +
 +   geom_point() +
-+   geom_errorbar(aes(ymin = conf.low, ymax = conf.high)) + 
++   geom_errorbar(aes(ymin = conf.low, 
++                     ymax = conf.high)) + 
 +   theme_bw() +
 +   coord_flip()
 ~~~
@@ -235,7 +236,7 @@ as one row per model. The metrics will depend on model type.
 
 Use `augment` to add a column to a dataset containing information such as fitted values,
 residuals, or cluster assignments. Column names have a `.` prefix to avoid overwriting
-existing column names. The first argument is a model object and the 2nd is data
+existing column names. The first argument is a model object and the 2nd is data.
 
 
 
