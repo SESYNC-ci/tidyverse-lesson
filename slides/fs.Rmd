@@ -34,7 +34,7 @@ Copy *just* files 57-59 into a new folder called "details" in your data folder.
 
 ```{r}
 file_copy(path = details[57:59], 
-          new_path = dir_create("data/details/"))
+          new_path = dir_create("output/details/"))
 ```
 
 ===
@@ -42,7 +42,7 @@ file_copy(path = details[57:59],
 Read in files from new location and create one big data frame using `purrr`'s `map_df` to iterate the `read_csv` function over the file paths. `.id` is a column name to identify each of the file paths. 
 
 ```{r message=FALSE}
-details_df <- dir_ls("data/details") %>% 
+details_df <- dir_ls("output/details") %>% 
   map_df(read_csv, .id = "filename")
 
 head(details_df)

@@ -15,7 +15,7 @@ We will copy some files from public-data for demonstration purposes.
 > library(fs)
 > path <- "/nfs/public-data/NOAA/www.ncdc.noaa.gov"
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ===
@@ -28,11 +28,22 @@ Find files with matching patterns in this highly nested set of folders.
 > details <- dir_ls(path, 
 +                   recursive = TRUE, 
 +                   regexp = "details")
+~~~
+{:title="Console" .input}
+
+
+~~~
+Warning: `recursive` is deprecated, please use `recurse` instead
+~~~
+{:.output}
+
+
+~~~r
 > # locations <- dir_ls(path, recursive = TRUE, regexp = "locations")
 > # fatalities <- dir_ls(path, recursive = TRUE, regexp = "fatalities")
 > basename(details)
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ~~~
@@ -108,7 +119,7 @@ Find files with matching patterns in this highly nested set of folders.
 ~~~r
 > dirname(details)
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ~~~
@@ -189,9 +200,9 @@ Copy *just* files 57-59 into a new folder called "details" in your data folder.
 
 ~~~r
 > file_copy(path = details[57:59], 
-+           new_path = dir_create("data/details/"))
++           new_path = dir_create("output/details/"))
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ===
@@ -201,36 +212,68 @@ Read in files from new location and create one big data frame using `purrr`'s `m
 
 
 ~~~r
-> details_df <- dir_ls("data/details") %>% 
+> details_df <- dir_ls("output/details") %>% 
 +   map_df(read_csv, .id = "filename")
-> 
+~~~
+{:title="Console" .input}
+
+
+~~~
+Warning: 60 parsing failures.
+  row                col           expected actual                                                              file
+49764 TOR_OTHER_WFO      1/0/T/F/TRUE/FALSE JAN    'output/details/StormEvents_details-ftp_v1.0_d2006_c20140824.csv'
+49764 TOR_OTHER_CZ_STATE 1/0/T/F/TRUE/FALSE MS     'output/details/StormEvents_details-ftp_v1.0_d2006_c20140824.csv'
+49764 TOR_OTHER_CZ_FIPS  1/0/T/F/TRUE/FALSE 091    'output/details/StormEvents_details-ftp_v1.0_d2006_c20140824.csv'
+49764 TOR_OTHER_CZ_NAME  1/0/T/F/TRUE/FALSE MARION 'output/details/StormEvents_details-ftp_v1.0_d2006_c20140824.csv'
+49854 TOR_OTHER_WFO      1/0/T/F/TRUE/FALSE MOB    'output/details/StormEvents_details-ftp_v1.0_d2006_c20140824.csv'
+..... .................. .................. ...... .................................................................
+See problems(...) for more details.
+~~~
+{:.output}
+
+
+~~~
+Warning: 8 parsing failures.
+  row      col           expected actual                                                              file
+69658 CATEGORY 1/0/T/F/TRUE/FALSE      2 'output/details/StormEvents_details-ftp_v1.0_d2008_c20140824.csv'
+70475 CATEGORY 1/0/T/F/TRUE/FALSE      2 'output/details/StormEvents_details-ftp_v1.0_d2008_c20140824.csv'
+70523 CATEGORY 1/0/T/F/TRUE/FALSE      2 'output/details/StormEvents_details-ftp_v1.0_d2008_c20140824.csv'
+70529 CATEGORY 1/0/T/F/TRUE/FALSE      2 'output/details/StormEvents_details-ftp_v1.0_d2008_c20140824.csv'
+70547 CATEGORY 1/0/T/F/TRUE/FALSE      2 'output/details/StormEvents_details-ftp_v1.0_d2008_c20140824.csv'
+..... ........ .................. ...... .................................................................
+See problems(...) for more details.
+~~~
+{:.output}
+
+
+~~~r
 > head(details_df)
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ~~~
 # A tibble: 6 x 52
   filename BEGIN_YEARMONTH BEGIN_DAY BEGIN_TIME END_YEARMONTH END_DAY
-  <chr>              <int>     <int>      <int>         <int>   <int>
-1 data/de…          200604         7       1515        200604       7
-2 data/de…          200601         1          0        200601      31
-3 data/de…          200601         1          0        200601      31
-4 data/de…          200601         1          0        200601      31
-5 data/de…          200601         1          0        200601      31
-6 data/de…          200601        30        500        200601      31
-# ... with 46 more variables: END_TIME <int>, EPISODE_ID <int>,
-#   EVENT_ID <int>, STATE <chr>, STATE_FIPS <int>, YEAR <int>,
-#   MONTH_NAME <chr>, EVENT_TYPE <chr>, CZ_TYPE <chr>, CZ_FIPS <int>,
+  <chr>              <dbl>     <dbl>      <dbl>         <dbl>   <dbl>
+1 output/…          200604         7       1515        200604       7
+2 output/…          200601         1          0        200601      31
+3 output/…          200601         1          0        200601      31
+4 output/…          200601         1          0        200601      31
+5 output/…          200601         1          0        200601      31
+6 output/…          200601        30        500        200601      31
+# … with 46 more variables: END_TIME <dbl>, EPISODE_ID <dbl>,
+#   EVENT_ID <dbl>, STATE <chr>, STATE_FIPS <dbl>, YEAR <dbl>,
+#   MONTH_NAME <chr>, EVENT_TYPE <chr>, CZ_TYPE <chr>, CZ_FIPS <dbl>,
 #   CZ_NAME <chr>, WFO <chr>, BEGIN_DATE_TIME <chr>, CZ_TIMEZONE <chr>,
-#   END_DATE_TIME <chr>, INJURIES_DIRECT <int>, INJURIES_INDIRECT <int>,
-#   DEATHS_DIRECT <int>, DEATHS_INDIRECT <int>, DAMAGE_PROPERTY <chr>,
+#   END_DATE_TIME <chr>, INJURIES_DIRECT <dbl>, INJURIES_INDIRECT <dbl>,
+#   DEATHS_DIRECT <dbl>, DEATHS_INDIRECT <dbl>, DAMAGE_PROPERTY <chr>,
 #   DAMAGE_CROPS <chr>, SOURCE <chr>, MAGNITUDE <dbl>,
-#   MAGNITUDE_TYPE <chr>, FLOOD_CAUSE <chr>, CATEGORY <chr>,
+#   MAGNITUDE_TYPE <chr>, FLOOD_CAUSE <chr>, CATEGORY <lgl>,
 #   TOR_F_SCALE <chr>, TOR_LENGTH <dbl>, TOR_WIDTH <dbl>,
 #   TOR_OTHER_WFO <chr>, TOR_OTHER_CZ_STATE <chr>,
-#   TOR_OTHER_CZ_FIPS <chr>, TOR_OTHER_CZ_NAME <chr>, BEGIN_RANGE <int>,
-#   BEGIN_AZIMUTH <chr>, BEGIN_LOCATION <chr>, END_RANGE <int>,
+#   TOR_OTHER_CZ_FIPS <chr>, TOR_OTHER_CZ_NAME <chr>, BEGIN_RANGE <dbl>,
+#   BEGIN_AZIMUTH <chr>, BEGIN_LOCATION <chr>, END_RANGE <dbl>,
 #   END_AZIMUTH <chr>, END_LOCATION <chr>, BEGIN_LAT <dbl>,
 #   BEGIN_LON <dbl>, END_LAT <dbl>, END_LON <dbl>,
 #   EPISODE_NARRATIVE <chr>, EVENT_NARRATIVE <chr>, DATA_SOURCE <chr>

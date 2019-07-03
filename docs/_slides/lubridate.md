@@ -16,11 +16,11 @@ See an unambiguously formatted datetime with
 ~~~r
 > Sys.time()
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ~~~
-[1] "2018-10-03 10:12:04 EDT"
+[1] "2019-07-03 15:31:27 EDT"
 ~~~
 {:.output}
 
@@ -34,11 +34,11 @@ What is it actually?
 ~~~r
 > as.numeric(Sys.time())
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ~~~
-[1] 1538575925
+[1] 1562182287
 ~~~
 {:.output}
 
@@ -52,7 +52,7 @@ There are many columns in the storm events data with date and time. Information
 ~~~r
 > names(details_df)
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ~~~
@@ -85,7 +85,7 @@ Unfortunately none are in standard format.
 ~~~r
 > details_df$BEGIN_DATE_TIME %>% head()
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ~~~
@@ -109,7 +109,7 @@ Use strptime or as.POSIXct to convert. For help specifying the format refer to [
 +   format = "%d-%b-%y %H:%M:%S")) %>%
 +   pull(begin_iso_date) %>% head(10)
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ~~~
@@ -131,7 +131,7 @@ lubridate has a slightly faster version of strptime
 ~~~r
 > library(lubridate)
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ~~~
@@ -153,7 +153,7 @@ The following object is masked from 'package:base':
 > fast_strptime(details_df$BEGIN_DATE_TIME, 
 +               format = "%d-%b-%y %H:%M:%S")
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ~~~
@@ -50157,8 +50157,7 @@ The following object is masked from 'package:base':
 [99995] "2007-04-11 14:00:00 UTC" "2007-04-14 02:00:00 UTC"
 [99997] "2007-04-23 12:00:00 UTC" "2007-04-01 00:00:00 UTC"
 [99999] "2007-04-14 04:00:00 UTC"
- [ reached getOption("max.print") -- omitted 87144 entries ]
- [ reached getOption("max.print") -- omitted 87144 entries ]
+ [ reached 'max' / getOption("max.print") -- omitted 87144 entries ]
 ~~~
 {:.output}
 
@@ -50176,7 +50175,7 @@ Or if you don't want to look up the letter codes for strptime
 +          end_datetime_iso = 
 +            dmy_hms(END_DATE_TIME)) 
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ===
@@ -50199,20 +50198,20 @@ Make a time interval using the `%--%` operator, then calculate its duration.
 +                 event_duration, 
 +                 event_duration_days) %>% head() 
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ~~~
 # A tibble: 6 x 3
   event_interval                                   event_duration        
-  <S4: Interval>                                   <S4: Duration>        
+  <Interval>                                       <Duration>            
 1 2006-04-07 15:15:00 UTC--2006-04-07 15:15:00 UTC 0s                    
 2 2006-01-01 00:00:00 UTC--2006-01-31 23:59:00 UTC 2678340s (~4.43 weeks)
 3 2006-01-01 00:00:00 UTC--2006-01-31 23:59:00 UTC 2678340s (~4.43 weeks)
 4 2006-01-01 00:00:00 UTC--2006-01-31 23:59:00 UTC 2678340s (~4.43 weeks)
 5 2006-01-01 00:00:00 UTC--2006-01-31 23:59:00 UTC 2678340s (~4.43 weeks)
 6 2006-01-30 05:00:00 UTC--2006-01-31 14:00:00 UTC 118800s (~1.38 days)  
-# ... with 1 more variable: event_duration_days <dbl>
+# … with 1 more variable: event_duration_days <dbl>
 ~~~
 {:.output}
 
@@ -50240,6 +50239,6 @@ existing variables
 +     CZ_TIMEZONE == "CST" ~ "US/Central")
 +   )
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 

@@ -21,7 +21,7 @@ Read in the `acs_cbp.csv` using the appropriate function in `readr`.
 > library(readr)
 > acs_cbp <- read_csv("data/acs_cbp.csv")
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ~~~
@@ -29,21 +29,21 @@ Parsed with column specification:
 cols(
   FIPS = col_character(),
   Sector = col_character(),
-  N1_4 = col_integer(),
-  N5_9 = col_integer(),
-  N10_19 = col_integer(),
-  N20_49 = col_integer(),
-  N50_99 = col_integer(),
-  N100_249 = col_integer(),
-  N250_499 = col_integer(),
-  N500_999 = col_integer(),
-  N1000 = col_integer(),
-  N1000_1 = col_integer(),
-  N1000_2 = col_integer(),
-  N1000_3 = col_integer(),
-  N1000_4 = col_integer(),
+  N1_4 = col_double(),
+  N5_9 = col_double(),
+  N10_19 = col_double(),
+  N20_49 = col_double(),
+  N50_99 = col_double(),
+  N100_249 = col_double(),
+  N250_499 = col_double(),
+  N500_999 = col_double(),
+  N1000 = col_double(),
+  N1000_1 = col_double(),
+  N1000_2 = col_double(),
+  N1000_3 = col_double(),
+  N1000_4 = col_double(),
   County = col_character(),
-  median_income = col_integer()
+  median_income = col_double()
 )
 ~~~
 {:.output}
@@ -62,7 +62,7 @@ One way to view details of the model fit is with `summary`.
 +             data = acs_cbp)
 > summary(fit1)
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ~~~
@@ -142,48 +142,31 @@ important component of the model.
 > library(broom)
 > tidy(fit1)
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ~~~
-                                                   term  estimate
-1                                           (Intercept) 12177.778
-2        Sectoragriculture forestry fishing and hunting 15790.308
-3               Sectorarts entertainment and recreation  5664.618
-4                                    Sectorconstruction 22220.913
-5                            Sectoreducational services 21800.994
-6                           Sectorfinance and insurance 25548.393
-7               Sectorhealth care and social assistance 16309.403
-8                                     Sectorinformation 23335.758
-9         Sectormanagement of companies and enterprises 49795.072
-10                                  Sectormanufacturing 26274.310
-11    Sectormining quarrying and oil and gas extraction 43897.054
-12    Sectorother services except public administration  9850.114
-13 Sectorprofessional scientific and technical services 30326.366
-14             Sectorreal estate and rental and leasing 19145.623
-15                                   Sectorretail trade  8203.758
-16                 Sectortransportation and warehousing 28509.098
-17                                      Sectorutilities 44643.180
-18                                Sectorwholesale trade 26765.918
-   std.error statistic       p.value
-1   215.6370  56.47352  0.000000e+00
-2   317.2988  49.76479  0.000000e+00
-3   317.3309  17.85082  4.771120e-71
-4   304.3456  73.01210  0.000000e+00
-5   320.9289  67.93092  0.000000e+00
-6   305.9275  83.51126  0.000000e+00
-7   304.5159  53.55846  0.000000e+00
-8   312.9391  74.56965  0.000000e+00
-9   551.0509  90.36383  0.000000e+00
-10  306.4083  85.74933  0.000000e+00
-11  344.9798 127.24528  0.000000e+00
-12  304.7358  32.32346 7.772501e-227
-13  306.6891  98.88309  0.000000e+00
-14  316.2501  60.53950  0.000000e+00
-15  304.1761  26.97043 4.719179e-159
-16  305.2284  93.40251  0.000000e+00
-17  316.8512 140.89638  0.000000e+00
-18  308.3853  86.79374  0.000000e+00
+# A tibble: 18 x 5
+   term                              estimate std.error statistic   p.value
+   <chr>                                <dbl>     <dbl>     <dbl>     <dbl>
+ 1 (Intercept)                         12178.      216.      56.5 0.       
+ 2 Sectoragriculture forestry fishi…   15790.      317.      49.8 0.       
+ 3 Sectorarts entertainment and rec…    5665.      317.      17.9 4.77e- 71
+ 4 Sectorconstruction                  22221.      304.      73.0 0.       
+ 5 Sectoreducational services          21801.      321.      67.9 0.       
+ 6 Sectorfinance and insurance         25548.      306.      83.5 0.       
+ 7 Sectorhealth care and social ass…   16309.      305.      53.6 0.       
+ 8 Sectorinformation                   23336.      313.      74.6 0.       
+ 9 Sectormanagement of companies an…   49795.      551.      90.4 0.       
+10 Sectormanufacturing                 26274.      306.      85.7 0.       
+11 Sectormining quarrying and oil a…   43897.      345.     127.  0.       
+12 Sectorother services except publ…    9850.      305.      32.3 7.77e-227
+13 Sectorprofessional scientific an…   30326.      307.      98.9 0.       
+14 Sectorreal estate and rental and…   19146.      316.      60.5 0.       
+15 Sectorretail trade                   8204.      304.      27.0 4.72e-159
+16 Sectortransportation and warehou…   28509.      305.      93.4 0.       
+17 Sectorutilities                     44643.      317.     141.  0.       
+18 Sectorwholesale trade               26766.      308.      86.8 0.       
 ~~~
 {:.output}
 
@@ -208,8 +191,8 @@ to include estimated confidence intervals to use with `ggplot2`'s
 +   theme_bw() +
 +   coord_flip()
 ~~~
-{:.input title="Console"}
-![ ]({{ site.baseurl }}/images/broom/unnamed-chunk-4-1.png)
+{:title="Console" .input}
+![ ]({% include asset.html path="images/broom/unnamed-chunk-4-1.png" %})
 {:.captioned}
 
 ===
@@ -222,12 +205,14 @@ as one row per model. The metrics will depend on model type.
 ~~~r
 > glance(fit1)
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ~~~
-  null.deviance df.null    logLik     AIC     BIC     deviance df.residual
-1  1.383328e+13   49315 -533177.3 1066393 1066560 7.099324e+12       49298
+# A tibble: 1 x 7
+  null.deviance df.null   logLik      AIC      BIC deviance df.residual
+          <dbl>   <int>    <dbl>    <dbl>    <dbl>    <dbl>       <int>
+1       1.38e13   49315 -533177. 1066393. 1066560.  7.10e12       49298
 ~~~
 {:.output}
 
@@ -244,7 +229,7 @@ existing column names. The first argument is a model object and the 2nd is data.
 > acs_cbp2 <- augment(fit1, data = acs_cbp)
 > names(acs_cbp2)
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ~~~

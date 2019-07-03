@@ -17,7 +17,7 @@ Load `stringr` as well as `dplyr`.
 > library(stringr)
 > library(dplyr)
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ~~~
@@ -56,7 +56,7 @@ tidyfit1 %>%
   str_remove("Sector") %>%
   str_to_title()
 ~~~
-{:.text-document title="worksheet-1.R"}
+{:title="worksheet-1.R" .text-document}
 
 
 ~~~
@@ -95,7 +95,7 @@ Another handy function in `stringr` truncates long strings
 +   str_to_title() %>%
 +   str_trunc(30, side = "right", ellipsis = "")
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ~~~
@@ -123,7 +123,7 @@ term1 <- pull(tidyfit1, term)
 term2 <- str_remove(term1, "Sector")
 term3 <- str_to_title(term2)
 ~~~
-{:.text-document title="worksheet-1.R"}
+{:title="worksheet-1.R" .text-document}
 
 
 or 
@@ -133,7 +133,7 @@ or
 ~~~r
 > str_to_title(str_remove(pull(tidyfit1, term), "Sector"))
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 ~~~
@@ -172,15 +172,15 @@ Another core tidyverse method is to use `purrr`'s `map_` functions for iteration
 +           ~str_remove(., "Sector") %>% 
 +            str_to_title())) 
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 
 
 ~~~r
-tidyfit1$term
+> tidyfit1$term
 ~~~
-{:.text-document title="Console"}
+{:title="Console" .input}
 
 
 ~~~

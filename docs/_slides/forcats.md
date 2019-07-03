@@ -25,8 +25,8 @@ Make the model term column a factor to use `fct_reorder` for sorting.
 +   theme_bw() +
 +   coord_flip()
 ~~~
-{:.input title="Console"}
-![ ]({{ site.baseurl }}/images/forcats/unnamed-chunk-1-1.png)
+{:title="Console" .input}
+![ ]({% include asset.html path="images/forcats/unnamed-chunk-1-1.png" %})
 {:.captioned}
 
 ===
@@ -38,7 +38,7 @@ Make the model term column a factor to use `fct_reorder` for sorting.
 ~~~r
 > # example
 ~~~
-{:.input title="Console"}
+{:title="Console" .input}
 
 
 

@@ -1,0 +1,16 @@
+title: A Tour of the Tidyverse
+handouts:
+tag:
+lesson:
+instructor: Kelly Hondula
+authors:
+  - Kelly Hondula
+sorter:
+  - intro
+  - broom
+  - purrr
+  - forcats
+  - fs
+  - lubridate
+  - leaflet
+  - conclude
