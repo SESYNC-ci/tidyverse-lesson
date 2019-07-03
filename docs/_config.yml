@@ -1,37 +1,17 @@
-# Site
+# Build Configuration
 
-title: A Tour of the Tidyverse
-handouts:
-tag:
-lesson:
-instructor: Kelly Hondula
-authors: Kelly Hondula
-
-# Slides
-
-slide_sorter:
-  - intro
-  - broom
-  - purrr
-  - forcats
-  - fs
-  - lubridate
-  - leaflet
-  - conclude
-  
-
-#####################################
-# Only modify content above or risk #
-# merge conflicts with upstream.    #
-#####################################
-
-# Style
-
-styleurl: https://cdn.rawgit.com/sesync-ci/lesson-style/v2.0/docs
-reveal: https://cdn.rawgit.com/hakimel/reveal.js/3.5.0
-
-# Jekyll
-
-markdown: kramdown
+markdown: kramdown 
 collections:
-  - slides
+  slides:
+    output: false
+  views:
+    output: true
+    permalink: /:name/
+  archive:
+    output: true
+    permalink: /:year/:month/:day/:title:output_ext
+
+# Asset Location
+
+imageurl: /assets/images/
+styleurl: /assets/css/
