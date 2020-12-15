@@ -6,8 +6,6 @@ A whirlwind tour of tidyverse packages in R.
 
 ## Instructor Notes
 
-tips on running the tutorial for instructors
-
 ## Cyberhelp @SESYNC
 
 The National Socio-Environmental Synthesis Center (SESYNC) curates and runs
